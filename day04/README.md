@@ -47,7 +47,6 @@ Instead of running the analysis from the command line, the user can now open a w
 - **Business logic vs. interface:** the *business logic* is the part of the program that does the real work (the hemolysis calculations). The *interface* is how the user interacts with it (before: the command line; now: a web page). Keeping them separate means the same logic can be reused with a different interface without rewriting it.
 - **Flask basics:** how a Flask app works as a small web server, how a *route* (`@app.route("/")`) connects a web address to a Python function, and how `GET` (opening the page) and `POST` (submitting the form) requests differ.
 - **Templates:** an HTML template is a page with placeholders (`{{ result }}`) and conditions (`{% if result %}`). Flask fills in a fresh copy of the page with new results on each upload, while the template file itself stays the same.
-- **File uploads:** receiving a file from an HTML form (`enctype="multipart/form-data"`), checking that it's a CSV, and saving it on the server.
 - **`requirements.txt`:** a standard file listing the packages a project needs, so anyone can install everything with one command.
 - **Static website vs. web application:** a static site (like my GitHub Pages site from the first assignment) is just HTML files. A Flask app is a Python program that has to be *running* to work. To share it with a public link, it would need to be deployed to a server (e.g. Render or PythonAnywhere).
 
