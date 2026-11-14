@@ -40,7 +40,7 @@ Instead of running the analysis from the command line, the user can now open a w
 3. Open a browser and go to: <http://127.0.0.1:5000>
 4. Upload a CSV file with hemolysis results and view the analysis.
 
-> Note: the app runs **locally** on your own computer (`127.0.0.1` means "this computer"). It works only while `app.py` is running in the terminal.
+> Note: the app runs **locally** on my computer (`127.0.0.1` means "this computer"). It works only while `app.py` is running in the terminal.
 
 ## What I learned in this assignment
 
@@ -50,8 +50,7 @@ Instead of running the analysis from the command line, the user can now open a w
 - **File uploads:** receiving a file from an HTML form (`enctype="multipart/form-data"`), checking that it's a CSV, and saving it on the server.
 - **`requirements.txt`:** a standard file listing the packages a project needs, so anyone can install everything with one command.
 - **Static website vs. web application:** a static site (like my GitHub Pages site from the first assignment) is just HTML files. A Flask app is a Python program that has to be *running* to work. To share it with a public link, it would need to be deployed to a server (e.g. Render or PythonAnywhere).
-- **Working with Git and GitHub from VS Code:** copying the previous assignment into a new folder so the original stays intact, then committing and pushing the changes through the Source Control panel.
-- **Using an AI coding assistant (GitHub Copilot, Agent mode):** writing a clear, specific prompt, referencing files with `#`, and reviewing every change before accepting it.
+
 
 ## Prompt used to create the web app
 
