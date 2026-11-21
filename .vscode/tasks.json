@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Hemolysis Interactive App",
+			"type": "process",
+			"command": "python",
+			"args": [
+				"app.py"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}\\day04_extension"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": false
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Run day04 logic tests",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-m",
+				"pytest",
+				"-q",
+				"day04/test_logic.py"
+			],
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
+}

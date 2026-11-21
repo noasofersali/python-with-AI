@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hemolysis CSV Analysis</title>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem auto; max-width: 1100px; padding: 0 1rem; color: #222; }
+        form { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; padding: 1rem; background: #f3f5f7; border-radius: 8px; }
+        label { display: grid; gap: .35rem; }
+        input, button { font: inherit; padding: .5rem; }
+        button { cursor: pointer; }
+        .error { padding: .75rem; border-left: 4px solid #b2182b; background: #fff0f0; color: #7d1020; }
+        .table-wrap { overflow-x: auto; }
+        .results-table { border-collapse: collapse; width: 100%; margin: 1rem 0 2rem; }
+        .results-table th, .results-table td { border: 1px solid #d5d9dd; padding: .5rem .65rem; text-align: left; }
+        .results-table th { background: #edf1f4; }
+        #hemolysis-plot { width: 100%; min-height: 540px; margin: 1rem 0; }
+        .plot-help { color: #555; }
+        dl { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; }
+        dt { font-weight: 600; }
+        dd { margin: 0; }
+    </style>
+</head>
+<body>
+    <h1>Hemolysis CSV Analysis</h1>
+    <p>Upload a CSV with subject, group, time/day, and hemolysis measurements.</p>
+    <form method="post" enctype="multipart/form-data">
+        <label>
+            CSV file
+            <input type="file" name="file" accept=".csv,text/csv" required>
+        </label>
+        <label>
+            Significance level (alpha)
+            <input type="number" name="alpha" min="0.000001" max="0.999999" step="any" value="{{ alpha_value }}" required>
+        </label>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if error %}
+        <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    {% if results %}
+        <h2>Detected columns</h2>
+        <dl>
+            {% for role, column in results.detected_columns.items() %}
+                <dt>{{ role }}</dt><dd>{{ column }}</dd>
+            {% endfor %}
+        </dl>
+
+        <h2>Group statistics</h2>
+        <div class="table-wrap" id="group-statistics-table">{{ results.group_table|safe }}</div>
+
+        <h2>ANOVA results</h2>
+        <div class="table-wrap" id="anova-results-table">{{ results.anova_table|safe }}</div>
+
+        <h2>Hemolysis over time</h2>
+        <p class="plot-help">Hover over an individual point to see its exact value. Right-click a point to exclude it or right-click it again to restore it.</p>
+        <div id="hemolysis-plot" data-upload-id="{{ results.upload_id }}"></div>
+        <p id="recalculate-status" role="status" aria-live="polite"></p>
+
+        <script>
+            window.hemolysisPlotData = {{ results.plot_data|tojson }};
+        </script>
+        <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+        <script src="{{ url_for('static', filename='interactive_plot.js') }}"></script>
+    {% endif %}
+</body>
+</html>
